@@ -1,0 +1,40 @@
+{% extends 'base/front_base.html' %}
+{% load blog_tags %}
+
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+
+{% block head %}
+    <link href="{% static 'js/SyntaxHighlighter/shCoreDefault.css' %}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{% static 'js/SyntaxHighlighter/shCore.js' %}"></script>
+    <script>
+        SyntaxHighlighter.all();//执行代码高亮
+    </script>
+    <link rel="stylesheet" href="{% static 'css/blog/blog_detail.min.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="main">
+        <div class="wrapper">
+            <div class="main-content-wrapper">
+                <div class="news-wrapper">
+                    <h1 class="title">{{ post.title }}</h1>
+                    <div class="news-info">
+                        <div class="info-group">
+                            <span class="author">{{ post.author.username }}</span>
+                            <span class="pub-time">{{ post.created|time_since }}</span>
+                            {% for tag in post.tags.all %}
+                                <a href="{% url 'blog:post_list_by_tag' tag.slug %}"><span class="category">{{ tag.name }}</span></a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <article class="article">
+                        {{ post.body|safe }}
+                    </article>
+                </div>
+            </div>
+            {% include 'common/sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}

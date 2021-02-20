@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/front_base.min.js' %}"></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="logo-box">
+            <a href="{% url 'index' %}"></a>
+        </div>
+        <ul class="nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="{% url 'blog:post_list' %}">博客列表</a></li>
+            <li><a href="{% url 'post_search' %}">搜索</a></li>
+        </ul>
+    </div>
+</header>
+{% block main %}{% endblock %}
+<footer class="footer">
+    <div class="top-group">
+        <div class="top-inner-group">
+            <div class="logo-box"></div>
+            <div class="detail-group">
+                <div class="line1">
+                    <ul class="links">
+                        <li><a href="#">Python教程</a></li>
+                        <li><a href="#">机器学习</a></li>
+                        <li><a href="#">大数据教程</a></li>
+                        <li><a href="#">错题集</a></li>
+                    </ul>
+                    <div class="about-us">
+
+                    </div>
+                </div>
+                <div class="line2">
+                    <div class="address">博主简介：timor</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-group">
+        ©2021
+    </div>
+</footer>
+
+</body>
+</html>

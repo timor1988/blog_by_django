@@ -1,0 +1,27 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+    {{ post.title }}
+{% endblock %}
+{% block head %}
+    <link href="{% static 'js/SyntaxHighlighter/shCoreDefault.css' %}" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" src="{% static 'js/SyntaxHighlighter/shCore.js' %}"></script>
+    <script>
+        SyntaxHighlighter.all();//执行代码高亮
+    </script>
+{% endblock %}
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <p class="date">
+        发布时间: {{ post.publish }} 作者: {{ post.author }}
+    </p>
+    {{ post.body|safe }}
+    <h2>相关文章</h2>
+    {% for post in similar_posts %}
+        <p>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </p>
+    {% empty %}
+        暂时没有相关文章
+    {% endfor %}
+
+{% endblock %}

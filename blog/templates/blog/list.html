@@ -1,0 +1,61 @@
+{% extends 'base/front_base.html' %}
+{% load blog_tags %}
+
+{% block title %}
+    Python Lover
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/blog/index.min.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="main">
+        <div class="wrapper">
+            <div class="main-content-wrapper">
+                <div class="list-outer-group">
+                    <ul class="list-tab" style="margin-top: -20px;">
+                        {% if not tag %}
+                            <li data-category="0" class="active"><a href="javascript:void(0);">博文列表</a></li>
+                        {% else %}
+                            <li data-category="0" class="active"><a href="javascript:void(0);">含标签: "{{ tag }}" 的文章</a></li>
+                        {% endif %}
+
+                    </ul>
+                    <ul class="list-inner-group">
+                        {% for post in posts %}
+                            <li>
+                                <div class="thumbnail-group">
+                                    <a href="{{ post.get_absolute_url }}">
+                                        <img src="{{ post.thumbnail }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="news-group">
+                                    <p class="title">
+                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                    </p>
+                                    <p class="desc">
+                                        {{ post.desc }}
+                                    </p>
+                                    <p class="more">
+                                        {% for tag in post.tags.all %}
+                                            <a href="{% url 'blog:post_list_by_tag' tag.slug %}"><span
+                                                    class="category">{{ tag.name }}</span></a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                        <span class="pub-time">{{ post.created|time_since }}</span>
+                                        <span class="author">{{ post.author.username }}</span>
+                                    </p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="load-more-group">
+                        {% include 'pagination.html' with page=posts %}
+                    </div>
+                </div>
+            </div>
+            {% include 'common/sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}

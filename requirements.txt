@@ -1,0 +1,17 @@
+asgiref==3.3.1
+cffi==1.14.4
+Django==3.1.5
+django-taggit==1.3.0
+django-uuslug==1.2.0
+gevent==21.1.2
+greenlet==1.0.0
+gunicorn==20.0.4
+psycopg2-binary==2.8.6
+pycparser==2.20
+python-slugify==4.0.1
+pytz==2020.5
+six==1.15.0
+sqlparse==0.4.1
+text-unidecode==1.3
+zope.event==4.5.0
+zope.interface==5.2.0

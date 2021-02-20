@@ -1,0 +1,25 @@
+{% load blog_tags %}
+<div id="sidebar">
+    <h2><a href="{% url 'index' %}">我的博客</a></h2>
+    <p>喜欢python,热爱编程.</p>
+    <p>当前文章总数: {% total_posts %}</p>
+    <p>
+        <a href="{% url 'blog:post_feed' %}">订阅我的RSS</a>
+    </p>
+    <h3>近期文章</h3>
+    {% show_latest_posts %}
+    <h3>试试搜索吧:</h3>
+    <a href="{% url 'blog:post_search' %}">点击跳转搜索界面</a>
+    <h3>&nbsp;</h3>
+    <p>
+        <a href="https://beian.miit.gov.cn/" target="_blank">
+            <strong><span style="color: red;font-size: 12px">鲁ICP备</span>19042220号-3</strong>
+        </a>
+    </p>
+    <p>
+        <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=37040402005003" target="_blank"
+           rel="noopener">
+            <img style="float: left" src="https://www.dipingle.com/wp-content/uploads/2020/11/gaba.png">
+            鲁公网安备37040402005003号</a>
+    </p>
+</div>

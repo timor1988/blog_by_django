@@ -1,0 +1,66 @@
+{% extends 'base/front_base.html' %}
+{% load blog_tags %}
+
+{% block title %}
+    搜索
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/search/search.min.css' %}">
+{% endblock %}
+
+{% block main %}
+    <div class="main">
+        <div class="wrapper">
+            <div class="main-content-wrapper">
+                <div class="search-group">
+                    <form action="" method="get">
+                        <input type="text" name="query" class="search-input" placeholder="{% if not query %}请输入关键字{% else %}{{ query }}{% endif %}">
+                        <input type="submit" class="search-btn" value="搜索">
+                    </form>
+                </div>
+                <div class="recommend-group">
+                    {% if posts %}
+                        <p class="recommend-title">搜索结果:</p>
+                    {% else %}
+                        <p class="recommend-title">&nbsp;</p>
+                    {% endif %}
+                    <ul class="recommend-list">
+                        {% for post in posts %}
+                            <li>
+                                <div class="thumbnail-group">
+                                    <a href="#">
+                                        <img src="{{ post.thumbnail }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="news-group">
+                                    <p class="title">
+                                        <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                                    </p>
+                                    <p class="desc">
+                                        {{ post.desc }}
+                                    </p>
+                                    <p class="more">
+                                        {% for tag in post.tags.all %}
+                                            <a href="{% url 'blog:post_list_by_tag' tag.slug %}"><span
+                                                    class="category">{{ tag.name }}</span></a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                        <span class="pub-time">{{ post.created|time_since }}</span>
+                                        <span class="author">{{ post.author.username }}</span>
+                                    </p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% if posts %}
+                        <div class="load-more-group">
+                            {% include 'pagination.html' with page=posts query=query %}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% include 'common/sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}
