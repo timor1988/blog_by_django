@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'taggit',
     'DUEditor',
-    'mdeditor',
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.postgres',
